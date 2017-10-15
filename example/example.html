@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>html-plane-component example</title>
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  <script src="http://www.numericjs.com/lib/numeric-1.2.6.min.js"></script>
+  <script src="../src/html-plane-component.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-plane position="-1 1 -4" rotation="0 45 0" scale="2 2 2" html-plane>
+      <div>
+        Hello World!
+      </div>
+    </a-plane>
+    <a-camera id="camera"></a-camera>
+  </a-scene>
+</body>
+</html>

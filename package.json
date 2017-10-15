@@ -1,0 +1,11 @@
+{
+  "name": "html-plane-component",
+  "version": "0.0.1",
+  "description": "Aframe component that makes html look like it's on a plane",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael",
+  "license": "ISC"
+}
