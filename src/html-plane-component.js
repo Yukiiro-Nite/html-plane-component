@@ -1,17 +1,24 @@
 AFRAME.registerComponent('html-plane', {
   schema: {
-    url: { type: 'string', default: ''}
+    src: { type: 'string', default: '' }
   },
   init: function () {
-    this.html = Array.from(this.el.children);
     this.camera = this.el.sceneEl.querySelector("#camera");
-
-    this.html.forEach( child => this.el.removeChild(child));
-
     this.htmlWrapper = document.createElement("div");
     this.htmlWrapper.style = this.getStyle();
-    this.html.forEach( child => this.htmlWrapper.appendChild(child));
-
+    if(this.data.src) {
+      this.html = document.createElement("iframe");
+      this.html.src = this.data.src;
+      // this.html.width = 1000;
+      // this.html.height = 1000;
+      this.htmlWrapper.appendChild(this.html);
+    } else {
+      const elements = Array.from(this.el.children);
+      this.html = document.createElement("div");
+      elements.forEach(child => this.el.removeChild(child));
+      elements.forEach(child => this.html.appendChild(child));
+      this.htmlWrapper.appendChild(this.html);
+    }
     document.body.appendChild(this.htmlWrapper);
   },
   update: function () {},
@@ -49,7 +56,7 @@ AFRAME.registerComponent('html-plane', {
     }
 
     // apply the matrix to the html element
-    this.html[0].style = this.styleFromObj({
+    this.html.style = this.styleFromObj({
       transform: `matrix3d(${transformArray.join(',')})`
     });
   },
@@ -64,7 +71,9 @@ AFRAME.registerComponent('html-plane', {
     'z-index': 2147483647,
     // perspective: '500px',
     top: 0,
-    left: 0
+    left: 0,
+    width: 0,
+    height: 0
   },
   getStyle: function (style = {}) {
     return this.styleFromObj(Object.assign({}, this.defaultStyle, style));
